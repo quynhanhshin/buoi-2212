@@ -1,17 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 export default function Tinhtuoi() {
-    const [Name, setName] = useState("Trần Ngọc Quỳnh Anh")
-    const [Year, setYear] = useState("1997")
-    let CurrentYear = new Date().getFullYear()
-    // const [kq,setKq] = useState(0)
-  return (
-    <div>
-        <label>Nhập tên</label><input type="text" value={Name} onChange={(e) => setName(e.target.value) } />
-        <br/>
-        <label>Nhập năm sinh</label><input type="text" value={Year} onChange={(e) => setYear(e.target.value) } />
-        <br/>
-        <p>Tuổi là: {CurrentYear - Year} </p>
-    </div>
-  )
+    const [Name, setName] = useState("");
+    const [text, setText] = useState("");
+    const [Year, setYear] = useState("");
+    const [age, setAge] = useState("");
+    return (
+        <div>
+            <label>Nhập tên </label>
+            <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Nhập tên" />
+            <br />
+            <label>Nhập năm sinh </label>
+            <input
+                type="text"
+                value={Year}
+                onChange={(e) => setYear(e.target.value)}
+                placeholder="Nhập tuổi"
+                onKeyDown={(e) => {
+                    if (e.key == "Enter") {
+                        setAge(new Date().getFullYear() - Year);
+                        setName(text);
+                    }
+                }}
+            />
+            <br />
+            <p>{Name && "Name: " + Name}</p>
+            <p>{age && "Age: " + age}</p>
+        </div>
+    );
 }
